@@ -36,13 +36,16 @@ class LoginController extends GetxController {
         return true;
 
         //kalu tidak ada email verification
-        // Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.HOME);
       } else {
         Get.snackbar("Terjadi Kesalahan", res.error!.message);
       }
     } else {
-      Get.snackbar("Terjadi Kesalahan", "Email dan Password belum diisi",
-          duration: Duration(seconds: 2));
+      Get.snackbar(
+        "Terjadi Kesalahan",
+        "Email dan Password belum diisi",
+        duration: Duration(seconds: 2),
+      );
     }
   }
 

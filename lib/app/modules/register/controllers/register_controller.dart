@@ -13,13 +13,16 @@ class RegisterController extends GetxController {
   //     TextEditingController(text: "matrix.black82@gmail.com");
   // TextEditingController passwordC = TextEditingController(text: "12345678");
 
+  TextEditingController nameC = TextEditingController();
   TextEditingController emailC = TextEditingController();
   TextEditingController passwordC = TextEditingController();
 
   SupabaseClient client = Supabase.instance.client;
 
   void SignUp() async {
-    if (emailC.text.isNotEmpty && passwordC.text.isNotEmpty) {
+    if (emailC.text.isNotEmpty &&
+        passwordC.text.isNotEmpty &&
+        nameC.text.isNotEmpty) {
       //eksekusi
       isLoading.value = true;
       GotrueSessionResponse res =
@@ -33,6 +36,12 @@ class RegisterController extends GetxController {
         print(res.user?.toJson());
         print(res.rawData);
 
+        await client.from("users").insert({
+          "email": emailC.text,
+          "name": nameC.text,
+          "created_at": DateTime.now().toIso8601String(),
+          "uid": res.user!.id,
+        }).execute();
         //kalu tidak ada email verification
         Get.offAllNamed(Routes.HOME);
 
