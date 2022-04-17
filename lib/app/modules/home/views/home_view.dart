@@ -11,6 +11,13 @@ class HomeView extends GetView<HomeController> {
       appBar: AppBar(
         title: Text('HOME'),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                controller.logout();
+              },
+              icon: Icon(Icons.logout_outlined))
+        ],
       ),
       body: Center(
         child: Text(

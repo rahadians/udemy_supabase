@@ -18,7 +18,7 @@ class LoginController extends GetxController {
 
   SupabaseClient client = Supabase.instance.client;
 
-  void SignIn() async {
+  void login() async {
     if (emailC.text.isNotEmpty && passwordC.text.isNotEmpty) {
       //eksekusi
       isLoading.value = true;
@@ -42,6 +42,11 @@ class LoginController extends GetxController {
       Get.snackbar("Terjadi Kesalahan", "Email dan Password belum diisi",
           duration: Duration(seconds: 2));
     }
+  }
+
+  swHidden() {
+    isHidden.value = !isHidden.value;
+    print("swHidden");
   }
 
   @override
