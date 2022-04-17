@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:udemy_supabase/app/controllers/auth_controller.dart';
 
 import 'app/routes/app_pages.dart';
 
@@ -17,6 +18,8 @@ void main() async {
   );
   print("==================");
   print(supabase.client.auth.session()?.toJson());
+
+  final authC = Get.put(AuthController(), permanent: true);
 
   runApp(
     GetMaterialApp(

@@ -18,7 +18,7 @@ class LoginController extends GetxController {
 
   SupabaseClient client = Supabase.instance.client;
 
-  void login() async {
+  Future<bool?> login() async {
     if (emailC.text.isNotEmpty && passwordC.text.isNotEmpty) {
       //eksekusi
       isLoading.value = true;
@@ -33,8 +33,10 @@ class LoginController extends GetxController {
         print(res.user?.toJson());
         print(res.rawData);
 
+        return true;
+
         //kalu tidak ada email verification
-        Get.offAllNamed(Routes.HOME);
+        // Get.offAllNamed(Routes.HOME);
       } else {
         Get.snackbar("Terjadi Kesalahan", res.error!.message);
       }

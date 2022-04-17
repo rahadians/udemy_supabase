@@ -5,8 +5,7 @@ import 'package:udemy_supabase/app/routes/app_pages.dart';
 class HomeController extends GetxController {
   SupabaseClient client = Supabase.instance.client;
 
-  void logout() async {
+  Future<void> logout() async {
     await client.auth.signOut();
-    Get.offAllNamed(Routes.LOGIN);
   }
 }
