@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:udemy_supabase/app/routes/app_pages.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -14,53 +13,52 @@ class LoginView extends GetView<LoginController> {
           title: Text('Login'),
           centerTitle: true,
         ),
-        body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.all(20),
-            children: [
-              TextField(
-                controller: controller.emailC,
-                autocorrect: false,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                    labelText: "Email", border: OutlineInputBorder()),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              TextField(
-                controller: controller.passwordC,
-                obscureText: (controller.isHidden.value),
-                autocorrect: false,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    onPressed: () => controller.isHidden.toggle(),
-                    icon: controller.isHidden.isTrue
-                        ? Icon(Icons.visibility_off)
-                        : Icon(Icons.visibility),
-                  ),
-                  labelText: "Password",
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Obx(
-                () => ElevatedButton(
+        body: ListView(
+          children: [
+            Obx(() => TextFormField(
+                  autocorrect: false,
+                  controller: controller.emailC,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(
+                      label: Text("Email"), border: OutlineInputBorder()),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            Obx(() => TextFormField(
+                  autocorrect: false,
+                  controller: controller.passwordC,
+                  obscureText: controller.isHidden.value,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: controller.isHidden.isTrue
+                            ? Icon(Icons.remove_red_eye)
+                            : Icon(Icons.elderly_outlined),
+                        onPressed: controller.isHidden.toggle(),
+                      ),
+                      label: Text("Password"),
+                      border: OutlineInputBorder()),
+                )),
+            SizedBox(
+              height: 30,
+            ),
+            Obx(() => ElevatedButton(
                   onPressed: () {
                     if (controller.isLoading.isFalse) {
-                      //eksekusi Login
-
+                      //Eksekusi Login
                     }
                   },
                   child:
-                      Text(controller.isLoading.isFalse ? "Login" : "Loading"),
-                ),
-              ),
-            ],
-          ),
+                      Text(controller.isLoading.isFalse ? "LOGIN" : "LOADING"),
+                )),
+            SizedBox(
+              height: 20,
+            ),
+            TextButton(
+                onPressed: () => Get.toNamed(Routes.REGISTER),
+                child: Text("Register"))
+          ],
         ));
   }
 }
