@@ -41,7 +41,7 @@ class LoginView extends GetView<LoginController> {
                           icon: controller.isHidden.isTrue
                               ? Icon(Icons.remove_red_eye)
                               : Icon(Icons.remove_red_eye_outlined),
-                          onPressed: controller.isHidden.toggle(),
+                          onPressed: () => controller.isHidden.toggle(),
                         ),
                         label: Text("Password"),
                         border: OutlineInputBorder()),

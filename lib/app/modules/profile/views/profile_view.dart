@@ -50,11 +50,30 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                       TextFormField(
                         autocorrect: false,
+                        readOnly: true,
                         controller: controller.emailC,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                             label: Text("Email"), border: OutlineInputBorder()),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Obx(() => TextFormField(
+                            autocorrect: false,
+                            controller: controller.passwordC,
+                            obscureText: controller.isHidden.value,
+                            textInputAction: TextInputAction.done,
+                            decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: controller.isHidden.isTrue
+                                      ? Icon(Icons.remove_red_eye)
+                                      : Icon(Icons.elderly_outlined),
+                                  onPressed: () => controller.isHidden.toggle(),
+                                ),
+                                label: Text("New Password"),
+                                border: OutlineInputBorder()),
+                          )),
                       SizedBox(
                         height: 20,
                       ),
@@ -64,7 +83,7 @@ class ProfileView extends GetView<ProfileController> {
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(
-                        height: 7,
+                        height: 20,
                       ),
                       Obx(
                         () => Text(
@@ -80,7 +99,7 @@ class ProfileView extends GetView<ProfileController> {
                         onPressed: () {
                           if (controller.isLoading.isFalse) {
                             //Eksekusi UPDATE Profile
-
+                            controller.updateProfile();
                           }
                         },
                         child: Text(controller.isLoading.isFalse

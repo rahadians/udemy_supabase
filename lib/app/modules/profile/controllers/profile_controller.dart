@@ -42,6 +42,16 @@ class ProfileController extends GetxController {
     await client.auth.signOut();
   }
 
+  void updateProfile() async {
+    if (nameC.text.isNotEmpty) {
+      isLoading.value = true;
+      await client.from("users").update({
+        "name": nameC.text,
+      }).match({"uid": client.auth.currentUser!.id}).execute();
+      isLoading.value = false;
+    }
+  }
+
   @override
   void onInit() {
     emailC = TextEditingController();
