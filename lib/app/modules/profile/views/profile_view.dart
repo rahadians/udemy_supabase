@@ -12,7 +12,7 @@ class ProfileView extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Profile Person'),
+          title: Text('MY PROFILE'),
           centerTitle: true,
           actions: [
             IconButton(
@@ -33,40 +33,63 @@ class ProfileView extends GetView<ProfileController> {
                   child: CircularProgressIndicator(),
                 );
               }
-              return ListView(
-                children: [
-                  TextFormField(
-                    autocorrect: false,
-                    controller: controller.nameC,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                        label: Text("Home"), border: OutlineInputBorder()),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    autocorrect: false,
-                    controller: controller.emailC,
-                    textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
-                        label: Text("Email"), border: OutlineInputBorder()),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      if (controller.isLoading.isFalse) {
-                        //Eksekusi UPDATE Profile
+              return SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListView(
+                    children: [
+                      TextFormField(
+                        autocorrect: false,
+                        controller: controller.nameC,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            label: Text("Home"), border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        autocorrect: false,
+                        controller: controller.emailC,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                            label: Text("Email"), border: OutlineInputBorder()),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        "Last Login : ",
+                        style: TextStyle(
+                            fontSize: 14, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        height: 7,
+                      ),
+                      Obx(
+                        () => Text(
+                          "${controller.lastLogin}",
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (controller.isLoading.isFalse) {
+                            //Eksekusi UPDATE Profile
 
-                      }
-                    },
-                    child: Text(controller.isLoading.isFalse
-                        ? "UPDATE PROFILE"
-                        : "LOADING"),
+                          }
+                        },
+                        child: Text(controller.isLoading.isFalse
+                            ? "UPDATE PROFILE"
+                            : "LOADING"),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               );
             }));
   }

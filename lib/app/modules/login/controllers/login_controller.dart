@@ -36,7 +36,7 @@ class LoginController extends GetxController {
         return true;
 
         //kalu tidak ada email verification
-        Get.offAllNamed(Routes.HOME);
+        // Get.offAllNamed(Routes.HOME);
       } else {
         Get.snackbar("Terjadi Kesalahan", res.error!.message);
       }
@@ -66,7 +66,7 @@ class LoginController extends GetxController {
   //   super.onReady();
   // }
 
-  @override
+  // @override
   void onClose() {
     emailC.dispose();
     passwordC.dispose();

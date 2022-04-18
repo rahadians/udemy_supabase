@@ -47,7 +47,7 @@ class LoginView extends GetView<LoginController> {
                         border: OutlineInputBorder()),
                   )),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -55,7 +55,7 @@ class LoginView extends GetView<LoginController> {
                     //Eksekusi Login
                     bool? cek = await controller.login();
                     if (cek != null && cek == true) authC.autoLogout();
-                    // Get.offAllNamed(Routes.HOME);
+                    Get.toNamed(Routes.HOME);
                   }
                 },
                 child: Obx(() =>

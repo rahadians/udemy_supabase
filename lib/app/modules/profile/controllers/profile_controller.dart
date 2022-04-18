@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
-
+import 'package:intl/intl.dart';
 import '../../../routes/app_pages.dart';
 
 class ProfileController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isHidden = true.obs;
+  RxString lastLogin = "-".obs;
 
   // TextEditingController emailC =
   //     TextEditingController(text: "matrix.black82@gmail.com");
@@ -30,6 +31,10 @@ class ProfileController extends GetxController {
 
     nameC.text = user["name"];
     emailC.text = user["email"];
+
+    lastLogin.value = DateFormat('dd-MM-yyy hh:mm:ss')
+        .format(DateTime.parse(client.auth.currentUser!.lastSignInAt!));
+
     // print(response.toJson());
   }
 
@@ -49,7 +54,7 @@ class ProfileController extends GetxController {
   //   super.onReady();
   // }
 
-  // @override
+  @override
   void onClose() {
     emailC.dispose();
     passwordC.dispose();
