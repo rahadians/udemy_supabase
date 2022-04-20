@@ -25,14 +25,10 @@ class AddNoteController extends GetxController {
         print(user.toJson());
         int no_id = (user.data as List).first['id'];
 
-        print(no_id);
+        print(" nomornya ${no_id}");
 
         await client.from("notes").insert({
-          // "user_id": no_id,
-          // "title": titleC.text,
-          // "desc": descC.text,
-          // "created_at": DateTime.now().toIso8601String()
-          "user_id": 1,
+          "user_id": no_id,
           "title": titleC.text,
           "desc": descC.text,
           "created_at": DateTime.now().toIso8601String()
