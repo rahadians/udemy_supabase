@@ -10,6 +10,9 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => Get.toNamed(Routes.ADD_NOTE),
+          child: Icon(Icons.add)),
       appBar: AppBar(
         title: Text('HOME'),
         centerTitle: true,
@@ -19,10 +22,15 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.person))
         ],
       ),
-      body: Center(
-        child: Text(
-          'HomeView is working',
-          style: TextStyle(fontSize: 20),
+      body: SafeArea(
+        child: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (context, index) => ListTile(
+            onTap: (() => Get.toNamed(Routes.EDIT_NOTE)),
+            leading: CircleAvatar(
+              child: Text("Judul ${index}"),
+            ),
+          ),
         ),
       ),
     );
