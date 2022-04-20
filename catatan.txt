@@ -3,3 +3,5 @@ get create page:login
 get install supabase_flutter
 
 password supabase a8i58g3KH#Z8GAp
+
+currentSession adalah token masing2 project 

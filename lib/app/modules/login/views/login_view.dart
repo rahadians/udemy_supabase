@@ -52,10 +52,11 @@ class LoginView extends GetView<LoginController> {
               ElevatedButton(
                 onPressed: () async {
                   if (controller.isLoading.isFalse) {
-                    //Eksekusi Login
+                    // Eksekusi Login
                     bool? cek = await controller.login();
+
                     if (cek != null && cek == true) authC.autoLogout();
-                    Get.toNamed(Routes.HOME);
+                    // Get.toNamed(Routes.HOME);
                   }
                 },
                 child: Obx(() =>

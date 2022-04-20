@@ -42,14 +42,32 @@ class ProfileController extends GetxController {
     await client.auth.signOut();
   }
 
-  void updateProfile() async {
+  Future<void> updateProfile() async {
     if (nameC.text.isNotEmpty) {
       isLoading.value = true;
       await client.from("users").update({
         "name": nameC.text,
       }).match({"uid": client.auth.currentUser!.id}).execute();
-      isLoading.value = false;
+
+      if (passwordC.text.isNotEmpty) {
+        print(client.auth.currentSession!.accessToken);
+        if (passwordC.text.length > 6) {
+          try {
+            await client.auth.api.updateUser(
+              // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjUwNDQ1NTQwLCJzdWIiOiIxYTVkZDMzNS02NjM2LTQ2NDgtYWRiNi04NTcyZDFkMjFkYjkiLCJlbWFpbCI6ImNAZ21haWwuY29tIiwicGhvbmUiOiIiLCJhcHBfbWV0YWRhdGEiOnsicHJvdmlkZXIiOiJlbWFpbCIsInByb3ZpZGVycyI6WyJlbWFpbCJdfSwidXNlcl9tZXRhZGF0YSI6e30sInJvbGUiOiJhdXRoZW50aWNhdGVkIn0.opEIcryULFvkGOokd3oe5jU0ff5Ez28VWsfWmES815g",
+              // UserAttributes(password: "123456789")
+              client.auth.currentSession!.accessToken.toString(),
+              UserAttributes(password: passwordC.text.toString()),
+            );
+          } catch (e) {
+            Get.snackbar("Terjadi Kesalahan", "errornya adalah ${e}");
+          }
+        } else {
+          Get.snackbar("Terjadi Kesalahan", "Password harus 6 karakter");
+        }
+      }
     }
+    isLoading.value = false;
   }
 
   @override
@@ -64,10 +82,10 @@ class ProfileController extends GetxController {
   //   super.onReady();
   // }
 
-  @override
-  void onClose() {
-    emailC.dispose();
-    passwordC.dispose();
-  }
+  // @override
+  // void onClose() {
+  //   emailC.dispose();
+  //   passwordC.dispose();
+  // }
   // void increment() => count.value++;
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:get/get_connect/sockets/src/sockets_html.dart';
+
 import '../../../routes/app_pages.dart';
 import '../../../controllers/auth_controller.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
   final authC = Get.find<AuthController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +44,7 @@ class ProfileView extends GetView<ProfileController> {
                         controller: controller.nameC,
                         textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
-                            label: Text("Home"), border: OutlineInputBorder()),
+                            label: Text("Name"), border: OutlineInputBorder()),
                       ),
                       SizedBox(
                         height: 20,
@@ -95,17 +96,26 @@ class ProfileView extends GetView<ProfileController> {
                       SizedBox(
                         height: 50,
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          if (controller.isLoading.isFalse) {
-                            //Eksekusi UPDATE Profile
-                            controller.updateProfile();
-                          }
-                        },
-                        child: Text(controller.isLoading.isFalse
-                            ? "UPDATE PROFILE"
-                            : "LOADING"),
-                      ),
+                      Obx(() => ElevatedButton(
+                            onPressed: () async {
+                              if (controller.isLoading.isFalse) {
+                                //Eksekusi UPDATE Profile
+
+                                controller.updateProfile();
+
+                                if (controller.passwordC.text.isNotEmpty &&
+                                    controller.passwordC.text.length >= 6) {
+                                  // controller.updateProfile();
+                                  // await controller.logout();
+                                  // await authC.reset();
+                                  Get.toNamed(Routes.LOGIN);
+                                }
+                              }
+                            },
+                            child: Text(controller.isLoading.isFalse
+                                ? "UPDATE PROFILE"
+                                : "LOADING"),
+                          )),
                     ],
                   ),
                 ),

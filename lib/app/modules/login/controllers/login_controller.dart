@@ -33,10 +33,10 @@ class LoginController extends GetxController {
         print(res.user?.toJson());
         print(res.rawData);
 
-        return true;
+        // return true;
 
         //kalu tidak ada email verification
-        // Get.offAllNamed(Routes.HOME);
+        Get.offAllNamed(Routes.HOME);
       } else {
         Get.snackbar("Terjadi Kesalahan", res.error!.message);
       }
@@ -51,7 +51,6 @@ class LoginController extends GetxController {
 
   swHidden() {
     isHidden.value = !isHidden.value;
-    print("swHidden");
   }
 
   @override
