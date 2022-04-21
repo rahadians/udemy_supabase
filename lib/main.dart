@@ -17,7 +17,7 @@ void main() async {
         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im10cHJua3Vmbnluc2VveHN6amdoIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTAwODYyNzgsImV4cCI6MTk2NTY2MjI3OH0.NrvJWl513euRkF8HpCvdxbDM27DR_iUcZuMoG9SuOzU",
   );
   print("==================");
-  print(supabase.client.auth.session()?.toJson());
+  // print(supabase.client.auth.session()?.toJson());
 
   final authC = Get.put(AuthController(), permanent: true);
 

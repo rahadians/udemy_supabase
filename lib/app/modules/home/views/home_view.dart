@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:udemy_supabase/app/controllers/auth_controller.dart';
 
+import '../../../data/models/node_model.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
@@ -23,14 +24,33 @@ class HomeView extends GetView<HomeController> {
         ],
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: 100,
-          itemBuilder: (context, index) => ListTile(
-            onTap: (() => Get.toNamed(Routes.EDIT_NOTE)),
-            leading: CircleAvatar(
-              child: Text("Judul ${index}"),
-            ),
-          ),
+        child: FutureBuilder(
+          future: controller.getAllNotes(),
+          builder: ((context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            return Obx(() => ListView.builder(
+                  itemCount: controller.allNotes.length,
+                  itemBuilder: (context, index) {
+                    Notes note = controller.allNotes[index];
+                    return ListTile(
+                        onTap: (() =>
+                            Get.toNamed(Routes.EDIT_NOTE, arguments: note)),
+                        leading: CircleAvatar(
+                          child: Text("${note.userId} "),
+                        ),
+                        title: Text("${note.desc}"),
+                        subtitle: Text("${note.desc}"),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {},
+                        ));
+                  },
+                ));
+          }),
         ),
       ),
     );

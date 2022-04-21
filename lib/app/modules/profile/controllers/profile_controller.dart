@@ -50,7 +50,7 @@ class ProfileController extends GetxController {
       }).match({"uid": client.auth.currentUser!.id}).execute();
 
       if (passwordC.text.isNotEmpty) {
-        print(client.auth.currentSession!.accessToken);
+        // print(client.auth.currentSession!.accessToken);
         if (passwordC.text.length > 6) {
           try {
             await client.auth.api.updateUser(

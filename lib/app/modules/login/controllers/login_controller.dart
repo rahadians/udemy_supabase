@@ -27,11 +27,11 @@ class LoginController extends GetxController {
       isLoading.value = false;
       if (res.error == null) {
         //kalau null berarti berhasil
-        print(res.data?.toJson());
-        print(res.provider);
-        print(res.url);
-        print(res.user?.toJson());
-        print(res.rawData);
+        // print(res.data?.toJson());
+        // print(res.provider);
+        // print(res.url);
+        // print(res.user?.toJson());
+        // print(res.rawData);
 
         // return true;
 

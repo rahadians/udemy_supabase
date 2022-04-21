@@ -21,11 +21,7 @@ class AddNoteController extends GetxController {
             .select("id")
             .match({"uid": client.auth.currentUser!.id}).execute();
 
-        print(client.auth.currentUser!.id);
-        print(user.toJson());
         int no_id = (user.data as List).first['id'];
-
-        print(" nomornya ${no_id}");
 
         await client.from("notes").insert({
           "user_id": no_id,
@@ -36,7 +32,6 @@ class AddNoteController extends GetxController {
         print("udah kesimpen");
       } catch (err) {
         print(err);
-        print("err");
       }
 
       isLoading.value = false;
