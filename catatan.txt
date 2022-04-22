@@ -12,3 +12,41 @@ wajib ditambahkan pada model data
     if (list == null) return List<Data>.empty();
     return list.map((item) => Data.fromJson(item)).toList();
   }
+
+========== ini untuk data =============
+  onFind: (dynamic filter) async {
+        try {
+          Uri url = Uri.parse(
+              "https://api.rajaongkir.com/starter/city?province=${controller.provAwalid}");
+
+          var response = await http
+              .get(url, headers: {"key": "428084606cd44a1724aaf7b2c83de401"});
+
+          if (response.statusCode == 200) {
+            List allCity = (json.decode(response.body)
+                as Map<String, dynamic>)["rajaongkir"]["results"];
+
+            List<City> allModelCity = [];
+
+            allCity.forEach(
+              (element) {
+                allModelCity.add(City(
+                    cityId: element["city_id"],
+                    cityName: element["city_name"],
+                    type: element["type"]));
+              },
+            );
+
+            return allModelCity;
+
+            // setState(() {});
+          } else {
+            print("Data tidak ada");
+            return [];
+          }
+        } catch (err) {
+          print(err);
+
+          return List<City>.empty();
+        }
+      },

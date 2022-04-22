@@ -36,17 +36,21 @@ class HomeView extends GetView<HomeController> {
                   itemCount: controller.allNotes.length,
                   itemBuilder: (context, index) {
                     Notes note = controller.allNotes[index];
+
                     return ListTile(
                         onTap: (() =>
                             Get.toNamed(Routes.EDIT_NOTE, arguments: note)),
                         leading: CircleAvatar(
-                          child: Text("${note.userId} "),
+                          child: Text("${note.id} "),
                         ),
                         title: Text("${note.desc}"),
                         subtitle: Text("${note.desc}"),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
-                          onPressed: () {},
+                          onPressed: () {
+                            controller.deleteID.value = note.id;
+                            controller.deleteNote();
+                          },
                         ));
                   },
                 ));
