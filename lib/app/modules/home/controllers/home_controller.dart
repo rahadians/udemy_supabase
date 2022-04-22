@@ -30,6 +30,7 @@ class HomeController extends GetxController {
       allNotes.value = List.from(dataNote);
 
       allNotes.refresh();
+      print("sat");
     } catch (err) {
       print(err);
     }

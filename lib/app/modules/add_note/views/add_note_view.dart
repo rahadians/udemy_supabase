@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:udemy_supabase/app/modules/home/controllers/home_controller.dart';
 
 import '../controllers/add_note_controller.dart';
 
 class AddNoteView extends GetView<AddNoteController> {
+  final homeC = Get.find<HomeController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,7 @@ class AddNoteView extends GetView<AddNoteController> {
                   if (controller.isLoading.isFalse) {
                     //eksekusi add note
                     controller.addNote();
+                    homeC.getAllNotes();
                   }
                 },
                 child: Text(
